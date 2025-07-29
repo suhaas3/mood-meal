@@ -11,6 +11,8 @@ function Home() {
   const navigate = useNavigate();
 
   const { userName } = useSelector((state) => state.auth.LoginUserDetails);
+  const {isAuthenticate } = useSelector((state) => state.auth);
+
 
   const openMoodForm = () => {
     setOpenMoodMealForm(prev => !prev);
@@ -24,6 +26,7 @@ function Home() {
           <h2 style={{ textAlign: 'center', marginTop: '20px', color: '#333' }}>
             Welcome, <span style={{ color: '#ff6600' }}>{userName}</span>!
           </h2>
+          <h2 style={{textAlign:"center",fontFamily: "arial",fontSize: "16px",color: "#333"}}>Please Login using right side top Login button</h2>
 
         </div>
         {/* Hero Section */}
@@ -57,7 +60,11 @@ function Home() {
         </section>
       </div>
       <FooterSection />
-      {openMoodMealForm && <MoodForm openMoodMealForm={openMoodMealForm} setOpenMoodMealForm={setOpenMoodMealForm} />}
+      {isAuthenticate ? (openMoodMealForm && <MoodForm openMoodMealForm={openMoodMealForm} setOpenMoodMealForm={setOpenMoodMealForm} />) : (
+  <div style={{ color: 'red' }}>Error: You must be logged in to access this feature.</div>
+) }
+
+       {/* {openMoodMealForm && <MoodForm openMoodMealForm={openMoodMealForm} setOpenMoodMealForm={setOpenMoodMealForm} />} */}
     </>
   );
 }

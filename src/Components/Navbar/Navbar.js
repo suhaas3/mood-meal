@@ -17,7 +17,7 @@ function Navbar() {
   const dispatch = useDispatch();
 
   const links = [
-    { path: '/home', name: 'Home' },
+    { path: '/', name: 'Home' },
     { path: '/moodmeal', name: "MoodMeal" }
   ];
 
