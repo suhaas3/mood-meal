@@ -1,13 +1,66 @@
-import React from "react";
+import React from 'react';
+import './Home.css';
+import { useNavigate } from "react-router-dom";
+import { Smile, Clock, Activity } from 'lucide-react';
 
 function Home() {
+  
+  const navigate = useNavigate();
+
+  const navigateToMoodMeal = (path) => {
+    navigate(path);
+  }
+
 
   return (
-    <>
-    <h1>Home section</h1>
-    </>
-  )
+    <div className="homepage">
+      {/* Hero Section */}
+      <section className="hero">
+        <h1 className="hero-title">MoodMeal</h1>
+        <p className="hero-quote">“Track your mood. Choose your meal. Transform your life.”</p>
+        <button className="hero-button" onClick={() => navigateToMoodMeal('/moodmeal')}>Get Started</button>
+      </section>
+
+      {/* Features Section */}
+      <section className="features">
+        <h2 className="features-heading">How MoodMeal Helps</h2>
+        <div className="feature-list">
+          <Feature
+            icon={<Smile className="feature-icon pink" />}
+            title="Log Your Mood"
+            description="Capture how you feel before you eat."
+          />
+          <Feature
+            icon={<Clock className="feature-icon yellow" />}
+            title="Track Meal Patterns"
+            description="Spot trends in emotional eating habits."
+          />
+          <Feature
+            icon={<Activity className="feature-icon green" />}
+            title="Improve Wellness"
+            description="Build awareness and balance with food."
+          />
+        </div>
+      </section>
+    </div>
+  );
 }
+
+function Feature({ icon, title, description }) {
+  const navigate = useNavigate();
+  const navigateToMoodMeal = () => {
+    navigate('/moodmeal')
+  }
+  return (
+    <div className="feature-box" onClick={() => navigateToMoodMeal('/moodmeal')}>
+      <div className="feature-icon-container">{icon}</div>
+      <h3 className="feature-title">{title}</h3>
+      <p className="feature-desc">{description}</p>
+    </div>
+  );
+}
+
+
 
 
 export default Home;
