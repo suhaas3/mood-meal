@@ -1,0 +1,73 @@
+.navbar-section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: rgb(236, 233, 233);
+  color: rgb(220, 42, 6);
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+.nav-lists {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 500px; 
+  margin-right: 50px;
+  margin-left: 100px;
+}
+
+/* .lists-top {
+  text-decoration: none;
+} */
+.lists {
+  cursor: pointer;
+  color: rgb(45, 44, 44);
+  font-size: 17px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.active-link {
+  border-bottom: 3px solid orange;
+}
+
+.search {
+  width: 280px;
+  height: 36px;
+  border-radius: 35px;
+  border-color: gray;
+  font-size: 16px;
+  padding-left: 10px;
+  margin-left: 30px;
+}
+.search::placeholder {
+  color: gray;
+}
+
+.cart-logo {
+  width: 50px;
+  cursor: pointer;
+  margin-left: 90px;
+}
+.dashboard-lists,
+.sign-up {
+    cursor: pointer;
+  color: rgb(45, 44, 44);
+  font-size: 17px;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-left: 30px;
+}
+
+.login-button-navbar {
+  background-color: orange;
+  color: white;
+  border: none;
+  padding: 6px 30px;
+  border-radius: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-left: 30px;
+}
+.login-button-navbar:focus {
+  outline: none;
+}
