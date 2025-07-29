@@ -17,9 +17,6 @@
   margin-left: 100px;
 }
 
-/* .lists-top {
-  text-decoration: none;
-} */
 .lists {
   cursor: pointer;
   color: rgb(45, 44, 44);
@@ -44,19 +41,16 @@
   color: gray;
 }
 
-.cart-logo {
-  width: 50px;
-  cursor: pointer;
-  margin-left: 90px;
-}
-.dashboard-lists,
-.sign-up {
-    cursor: pointer;
+.signup-list {
   color: rgb(45, 44, 44);
-  font-size: 17px;
-  font-family: Arial, Helvetica, sans-serif;
-  margin-left: 30px;
+  font-size: 16px;
+  font-family: arial;
+  padding-left: 30px;
+  padding-right: 30px;
+  cursor: pointer;
 }
+
+
 
 .login-button-navbar {
   background-color: orange;
