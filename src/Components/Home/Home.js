@@ -2,6 +2,8 @@ import React from 'react';
 import './Home.css';
 import { useNavigate } from "react-router-dom";
 import { Smile, Clock, Activity } from 'lucide-react';
+import FooterSection from '../../FooterSection/FooterSection';
+import { useSelector } from 'react-redux';
 
 function Home() {
   
@@ -11,9 +13,19 @@ function Home() {
     navigate(path);
   }
 
+  const { userName} = useSelector((state) => state.auth.LoginUserDetails);
+
+
 
   return (
+    <>
     <div className="homepage">
+      <div className='welcome-user'>
+        <h2 style={{ textAlign: 'center', marginTop: '20px', color: '#333' }}>
+          Welcome, <span style={{ color: '#ff6600' }}>{userName}</span>!
+        </h2>
+
+      </div>
       {/* Hero Section */}
       <section className="hero">
         <h1 className="hero-title">MoodMeal</h1>
@@ -43,6 +55,8 @@ function Home() {
         </div>
       </section>
     </div>
+    <FooterSection/>
+    </>
   );
 }
 
@@ -52,15 +66,14 @@ function Feature({ icon, title, description }) {
     navigate('/moodmeal')
   }
   return (
+    <>
     <div className="feature-box" onClick={() => navigateToMoodMeal('/moodmeal')}>
       <div className="feature-icon-container">{icon}</div>
       <h3 className="feature-title">{title}</h3>
       <p className="feature-desc">{description}</p>
     </div>
+</>
   );
 }
-
-
-
 
 export default Home;
