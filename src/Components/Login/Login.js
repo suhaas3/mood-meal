@@ -5,6 +5,7 @@
   import { AuthLogin } from "../../Redux-toolkit/AuthSlice";
   import TextField from '@mui/material/TextField';
 import Button from "@mui/material/Button";
+import './Login.css';
   
   
   function Login({setOpenLogin}) {
@@ -39,8 +40,8 @@ import Button from "@mui/material/Button";
           <div className="login-sub-section">
                   <TextField id="outlined-basic" className="userNameBox" label="UserName"  name="userName" onChange={handleLoginDetails} variant="outlined" />
             <TextField id="outlined-basic" className="passwordBox"  label="PassWord"  name="passWord" onChange={handleLoginDetails} variant="outlined" />
-            
-            <Button onClick={handleSubmit} className="login-button-new" variant="contained">Login</Button>
+
+            <button onClick={handleSubmit} className="login-button-new">Login</button>
 
           </div>
         </div>

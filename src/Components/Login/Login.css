@@ -20,32 +20,20 @@
 }
 
 .userNameBox,
-.passwordBox { 
-  height: 20px;
+.passwordBox {
   width: 320px;
 }
 
-.userNameBox::placeholder,
-.passwordBox::placeholder {
-  padding-left: 10px;
+.login-button-new {
+  background-color: rgb(195, 184, 60);
+  color: white;
+  border: none;
   font-size: 16px;
   font-family: arial;
-} 
-
-.login-button-new {
-  color: white;
-  padding: 3px 89px;
-  border: none;
   border-radius: 3px;
   cursor: pointer;
-      padding: 6px 138px;
+  padding: 6px 138px;
 }
-
-
-
-
-
-
-
-
-
+.login-button-new:focus {
+  outline: none;
+}
