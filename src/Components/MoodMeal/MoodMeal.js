@@ -1,24 +1,28 @@
 import React, { useEffect, useMemo, useState } from "react";
 import './MoodMeal.css';
 import FooterSection from "../../FooterSection/FooterSection";
+import { useSelector } from "react-redux";
 
 function MoodMeal() {
 
   const [moodMeal, setMoodMeal] = useState('All');
-
   const [filteredMoodMeal, setFilteredOptionMoodMeal] = useState([]);
+  const [greetings, setGreetings] = useState('');
+
+  const { username, mood } = useSelector((state) => state.mood.UserDetails)
+
 
   const mealData = [
     { type: "happy", meals: ["Fruit salad", "Pasta", "Smoothie"], image: "https://mojo.generalmills.com/api/public/content/bUCmBsXVSUuUFJy_6qQRWQ_gmi_hi_res_jpeg.jpeg?v=9bffdf1f&t=466b54bb264e48b199fc8e83ef1136b4" },
     { type: "sad", meals: ["Ice cream", "Brownie", "Muffins"], image: "https://i.ytimg.com/vi/xN0iyPj4PJI/sddefault.jpg" },
     { type: "hungry", meals: ["Burger", "Pizza", "Wrap"], image: "https://assets.foodhub.com/static/3c650c09816fcbd16728b8b796aaa45e/img/1721159367phpMZ4s08.jpg" },
     { type: "angry", meals: ["Spicy wings", "Tacos", "Hot dog"], image: "https://images.squarespace-cdn.com/content/v1/613bbf5ed2d39e75883d78c2/5c2b9eb5-1e83-4c94-9edc-6d215a0101ce/IMG_3142.jpg" },
-    { type: "bored", meals: ["Chips", "Trail mix", "Popcorn"], image: "https://preventionrd.com/wp-content/uploads/2024/07/Popcorn-Trail-Mix-FI.jpg"},
+    { type: "bored", meals: ["Chips", "Trail mix", "Popcorn"], image: "https://preventionrd.com/wp-content/uploads/2024/07/Popcorn-Trail-Mix-FI.jpg" },
     { type: "anxious", meals: ["Chocolate", "Cookies", "Cup noodles"], image: "https://www.allrecipes.com/thmb/yYmYR71xo-GmDPqGa9D2AubyMIY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/9827-chocolate-chocolate-chip-cookies-i--DDMFS-094-2x1-1ea5681d74e549d28ac0254d798a072f.jpg" },
     { type: "tired", meals: ["Coffee", "Oats", "Green tea"], image: "https://thumbs.dreamstime.com/b/matcha-green-tea-breakfast-top-view-white-background-oatmeal-berries-toasts-wooden-tray-nuts-coffee-162949473.jpg" },
     { type: "happy", meals: ["Sushi", "Veg sandwich", "Pancakes"], image: "https://thumbs.dreamstime.com/b/beautifully-decorated-catering-banquet-table-different-food-snacks-appetizers-sandwich-pancakes-fresh-salad-corporate-113283776.jpg" },
-    { type: "sad", meals: ["Instant noodles", "Cheesecake", "Cake"], image:  "https://www.justonecookbook.com/wp-content/uploads/2024/12/Japanese-Cheesecake-4631-2024-NEW-I-1.jpg"},
-    { type: "hungry", meals: ["Grilled chicken", "Paratha", "Paneer curry"], image:  "https://assets.box8.co.in/rectangle-19x10/xxhdpi/product/3943"},
+    { type: "sad", meals: ["Instant noodles", "Cheesecake", "Cake"], image: "https://www.justonecookbook.com/wp-content/uploads/2024/12/Japanese-Cheesecake-4631-2024-NEW-I-1.jpg" },
+    { type: "hungry", meals: ["Grilled chicken", "Paratha", "Paneer curry"], image: "https://assets.box8.co.in/rectangle-19x10/xxhdpi/product/3943" },
     { type: "angry", meals: ["Fried rice", "Chili paneer", "Spicy noodles"], image: "https://thetableofspice.com/wp-content/uploads/2022/09/DSC_2924-1440x960-1.jpg" },
     { type: "bored", meals: ["Biscuits", "Dry fruits", "Granola"], image: "https://i.ytimg.com/vi/5gOYNeAohWY/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDvaSge8MIQZ6sGrjImAWJxCbmDMA" },
     { type: "anxious", meals: ["Milkshake", "Candy", "Donut"], image: "https://i.ytimg.com/vi/c140jybVt4A/maxresdefault.jpg" },
@@ -41,7 +45,6 @@ function MoodMeal() {
     { type: "sad", meals: ["Custard", "Ice cream", "Dark chocolate"], image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7oYKwCWyg7znXzYr9OEOkz6oej4yVRiV_oA&s" }
   ];
 
-
   useEffect(() => {
     const filtered = moodMeal === 'All'
       ? mealData
@@ -51,10 +54,43 @@ function MoodMeal() {
   }, [moodMeal]);
 
 
+  let message;
+  function GreetingMood({ username, mood }) {
+
+    if (mood === 'sad') {
+      message = `Hi ${username}, we noticed you're feeling sad. Let's brighten your day with a warm meal! 😊`;
+      setGreetings(message)
+    } else if (mood === 'happy') {
+      message = `Great to see you happy, ${username}! Keep the good vibes going! 🌞`;
+      setGreetings(message)
+    } else if (mood === 'angry') {
+      message = `Hey ${username}, take a deep breath. A good meal might help you feel better. 🍲`;
+      setGreetings(message)
+    } else if (mood === 'hungry') {
+      message = `Hi ${username}, hunger calls! Let’s find something tasty for you. 🍕`;
+      setGreetings(message)
+    } else if (mood === 'bored') {
+      message = `Bored, ${username}? Let’s spice things up with a fun meal experience! 🍜`;
+      setGreetings(message);
+    } else if (mood === 'anxious') {
+      message = `Feeling anxious, ${username}? A soothing meal can bring some calm. ☁️`;
+      setGreetings(message);
+    } else {
+      message = `Welcome back, ${username}! Hope you're doing well. 🍽️`;
+    }
+  }
+
+  useEffect(() => {
+    GreetingMood({username,mood})
+  },[]);
 
 
   return (
     <>
+
+      <div style={{ padding: '20px', fontSize: '20px', fontFamily: 'Arial' }}>
+        {greetings}
+      </div>
 
       <div className="filter-conatainer">
         <div className="mood-option">
@@ -62,6 +98,7 @@ function MoodMeal() {
           <select onChange={(e) => setMoodMeal(e.target.value)}>
             <option>All</option>
             <option>happy</option>
+            <option>sad</option>
             <option>tired</option>
             <option>anxious</option>
             <option>bored</option>
@@ -91,7 +128,7 @@ function MoodMeal() {
           </div>
         </div>
       </div>
-      <FooterSection/>
+      <FooterSection />
     </>
   );
 }
