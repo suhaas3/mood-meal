@@ -5,18 +5,24 @@ import { Smile, Clock, Activity } from 'lucide-react';
 import FooterSection from '../../FooterSection/FooterSection';
 import { useSelector } from 'react-redux';
 import MoodForm from '../../MoodForm/MoodForm';
+import Dialog from '@mui/material/Dialog';
 
 function Home() {
   const [openMoodMealForm, setOpenMoodMealForm] = useState(false);
+  const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
 
   const { userName } = useSelector((state) => state.auth.LoginUserDetails);
-  const {isAuthenticate } = useSelector((state) => state.auth);
+  const { isAuthenticate } = useSelector((state) => state.auth);
 
 
   const openMoodForm = () => {
     setOpenMoodMealForm(prev => !prev);
   }
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
 
   return (
@@ -26,15 +32,32 @@ function Home() {
           <h2 style={{ textAlign: 'center', marginTop: '20px', color: '#333' }}>
             Welcome, <span style={{ color: '#ff6600' }}>{userName}</span>!
           </h2>
-          <h2 style={{textAlign:"center",fontFamily: "arial",fontSize: "16px",color: "#333"}}>Please Login using right side top Login button and then Click the below Get Start button</h2>
+          <h2 style={{ textAlign: "center", fontFamily: "arial", fontSize: "16px", color: "#333" }}>Please Login using right side top Login button and then Click the below Get Start button</h2>
 
         </div>
         {/* Hero Section */}
         <section className="hero">
           <h1 className="hero-title">MoodMeal</h1>
           <p className="hero-quote">“Track your mood. Choose your meal. Transform your life.”</p>
-          {/* <button className="hero-button" onClick={() => navigateToMoodMeal('/moodmeal')}>Get Started</button> */}
-          <button className="hero-button" onClick={openMoodForm}>Get Started</button>
+
+          {isAuthenticate ? (
+            <>
+              <button className="hero-button" onClick={openMoodForm}>Get Started</button>
+              {openMoodMealForm && (
+                <MoodForm
+                  openMoodMealForm={openMoodMealForm}
+                  setOpenMoodMealForm={setOpenMoodMealForm}
+                />
+              )}
+            </>
+          ) : (
+            <div style={{ color: 'red' }}>
+              Error: You must be logged in to access this feature.
+            </div>
+          )}
+
+          {/* <button className="hero-button" onClick={openMoodForm}>Get Started</button>  */}
+
         </section>
 
         {/* Features Section */}
@@ -60,9 +83,10 @@ function Home() {
         </section>
       </div>
       <FooterSection />
-      {isAuthenticate ? (openMoodMealForm && <MoodForm openMoodMealForm={openMoodMealForm} setOpenMoodMealForm={setOpenMoodMealForm} />) : (
-  <div style={{ color: 'red' }}>Error: You must be logged in to access this feature.</div>
-) }
+      {/* {isAuthenticate ? (openMoodMealForm && <MoodForm openMoodMealForm={openMoodMealForm} setOpenMoodMealForm={setOpenMoodMealForm} />) : (
+        <div style={{ color: 'red' }}>Error: You must be logged in to access this feature.</div>
+      )
+      } */}
 
     </>
   );
