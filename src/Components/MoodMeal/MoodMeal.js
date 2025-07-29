@@ -35,7 +35,7 @@ function MoodMeal() {
     { type: "anxious", meals: ["Nutella toast", "Pastry", "Hot cocoa"], image: "https://www.allrecipes.com/thmb/4kO7JBAK5IYzLp-me5Uh7XEw0lE=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/ALR-239753-nutella-stuffed-french-toast-VAT-4x3-1991e7019b5c49359a49d8be6065d8b4.jpg" },
     { type: "tired", meals: ["Smoothie", "Protein bar", "Soup"], image: "https://crazynutrition.co.uk/cdn/shop/articles/HERO_7ac1f226-6518-4bb4-bee0-21eef3d0c801.png?v=1707737375" },
     { type: "happy", meals: ["Lassi", "Paneer tikka", "Fruit bowl"], image: "https://nfcihospitality.com/wp-content/uploads/2019/04/lassi-1.jpg.webp" },
-    { type: "sad", meals: ["Garlic bread", "Chocolate shake", "Nachos"], image: "https://potatorolls.com/wp-content/uploads/Truffled-Garlic-Bread-Nachos2-960x640.jpg" },
+    { type: "sad", meals: ["Garlic bread", "Chocolate shake", "Nachos"], image: "Meals: Garlic bread, Chocolate shake, Nachos" },
     { type: "hungry", meals: ["Roti sabzi", "Idli", "Rice bowl"], image: "https://maayeka.com/wp-content/uploads/2013/10/soft-idli-recipe.jpg.webp" },
     { type: "angry", meals: ["Aloo tikki", "Mirchi bhaji", "Red curry"], image: "https://ranveerbrar.com/wp-content/uploads/2024/12/aloo-tikki-chaat.jpg" },
     { type: "bored", meals: ["Toast", "Cornflakes", "Energy bites"], image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSG0DMuNkCG96u1fi6ukW7C7daozA7KTG84g&s" },
