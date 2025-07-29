@@ -1,0 +1,46 @@
+.mood-form-container {
+  max-width: 400px;
+  margin: 30px auto;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #fdf7f1;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.mood-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.mood-form label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #444;
+}
+
+.mood-form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+.mood-form button {
+  width: 100%;
+  padding: 10px;
+  background-color: #ff6600;
+  border: none;
+  color: white;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.mood-form button:hover {
+  background-color: #e65900;
+}
