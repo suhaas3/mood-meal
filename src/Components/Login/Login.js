@@ -39,7 +39,7 @@ import './Login.css';
         <div className="login-section">
           <div className="login-sub-section">
                   <TextField id="outlined-basic" className="userNameBox" label="UserName"  name="userName" onChange={handleLoginDetails} variant="outlined" />
-            <TextField id="outlined-basic" className="passwordBox"  label="PassWord"  name="passWord" onChange={handleLoginDetails} variant="outlined" />
+            <TextField id="outlined-basic" className="passwordBox"  label="PassWord"  type="password"   name="passWord" onChange={handleLoginDetails} variant="outlined" />
 
             <button onClick={handleSubmit} className="login-button-new">Login</button>
 
