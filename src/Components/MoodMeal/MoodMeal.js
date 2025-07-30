@@ -4,13 +4,11 @@ import FooterSection from "../../FooterSection/FooterSection";
 import { useSelector } from "react-redux";
 
 function MoodMeal() {
-
-  const [moodMeal, setMoodMeal] = useState('All');
+  const [moodMeal, setMoodMeal] = useState('');
   const [filteredMoodMeal, setFilteredOptionMoodMeal] = useState([]);
   const [greetings, setGreetings] = useState('');
 
-  const { username, mood } = useSelector((state) => state.mood.UserDetails)
-
+  const { username, mood } = useSelector((state) => state.mood.UserDetails);
 
   const mealData = [
     { type: "happy", meals: ["Fruit salad", "Pasta", "Smoothie"], image: "https://mojo.generalmills.com/api/public/content/bUCmBsXVSUuUFJy_6qQRWQ_gmi_hi_res_jpeg.jpeg?v=9bffdf1f&t=466b54bb264e48b199fc8e83ef1136b4" },
@@ -35,7 +33,7 @@ function MoodMeal() {
     { type: "anxious", meals: ["Nutella toast", "Pastry", "Hot cocoa"], image: "https://www.allrecipes.com/thmb/4kO7JBAK5IYzLp-me5Uh7XEw0lE=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/ALR-239753-nutella-stuffed-french-toast-VAT-4x3-1991e7019b5c49359a49d8be6065d8b4.jpg" },
     { type: "tired", meals: ["Smoothie", "Protein bar", "Soup"], image: "https://crazynutrition.co.uk/cdn/shop/articles/HERO_7ac1f226-6518-4bb4-bee0-21eef3d0c801.png?v=1707737375" },
     { type: "happy", meals: ["Lassi", "Paneer tikka", "Fruit bowl"], image: "https://nfcihospitality.com/wp-content/uploads/2019/04/lassi-1.jpg.webp" },
-    { type: "sad", meals: ["Garlic bread", "Chocolate shake", "Nachos"], image: "Meals: Garlic bread, Chocolate shake, Nachos" },
+    { type: "sad", meals: ["Garlic bread", "Chocolate shake", "Nachos"], image: "https://img.taste.com.au/O_5e5BxC/taste/2016/11/tray-baked-nachos-102903-1.jpeg" },
     { type: "hungry", meals: ["Roti sabzi", "Idli", "Rice bowl"], image: "https://maayeka.com/wp-content/uploads/2013/10/soft-idli-recipe.jpg.webp" },
     { type: "angry", meals: ["Aloo tikki", "Mirchi bhaji", "Red curry"], image: "https://ranveerbrar.com/wp-content/uploads/2024/12/aloo-tikki-chaat.jpg" },
     { type: "bored", meals: ["Toast", "Cornflakes", "Energy bites"], image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSG0DMuNkCG96u1fi6ukW7C7daozA7KTG84g&s" },
@@ -45,68 +43,56 @@ function MoodMeal() {
     { type: "sad", meals: ["Custard", "Ice cream", "Dark chocolate"], image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7oYKwCWyg7znXzYr9OEOkz6oej4yVRiV_oA&s" }
   ];
 
-  useEffect(() => {
-    const filtered = moodMeal === 'All'
-      ? mealData
-      : mealData.filter(item => item.type === moodMeal);
+  const moodOptions = ["happy", "sad", "hungry", "angry", "bored", "anxious", "tired"];
 
+  useEffect(() => {
+    const filtered = mealData.filter(item => item.type === moodMeal);
     setFilteredOptionMoodMeal(filtered);
   }, [moodMeal]);
 
-
+useEffect(() => {
   let message;
-  function GreetingMood({ username, mood }) {
 
-    if (mood === 'sad') {
-      message = `Hi ${username}, we noticed you're feeling sad. Let's brighten your day with a warm meal! 😊`;
-      setGreetings(message)
-    } else if (mood === 'happy') {
-      message = `Great to see you happy, ${username}! Keep the good vibes going! 🌞`;
-      setGreetings(message)
-    } else if (mood === 'angry') {
-      message = `Hey ${username}, take a deep breath. A good meal might help you feel better. 🍲`;
-      setGreetings(message)
-    } else if (mood === 'hungry') {
-      message = `Hi ${username}, hunger calls! Let’s find something tasty for you. 🍕`;
-      setGreetings(message)
-    } else if (mood === 'bored') {
-      message = `Bored, ${username}? Let’s spice things up with a fun meal experience! 🍜`;
-      setGreetings(message);
-    } else if (mood === 'anxious') {
-      message = `Feeling anxious, ${username}? A soothing meal can bring some calm. ☁️`;
-      setGreetings(message);
-    } else {
-      message = `Welcome back, ${username}! Hope you're doing well. 🍽️`;
-    }
+  if (mood === 'sad') {
+    message = `Hi ${username}, we noticed you're feeling sad. Let's brighten your day with a warm meal! 😊`;
+  } else if (mood === 'happy') {
+    message = `Great to see you happy, ${username}! Keep the good vibes going! 🌞`;
+  } else if (mood === 'angry') {
+    message = `Hey ${username}, take a deep breath. A good meal might help you feel better. 🍲`;
+  } else if (mood === 'hungry') {
+    message = `Hi ${username}, hunger calls! Let’s find something tasty for you. 🍕`;
+  } else if (mood === 'bored') {
+    message = `Bored, ${username}? Let’s spice things up with a fun meal experience! 🍜`;
+  } else if (mood === 'anxious') {
+    message = `Feeling anxious, ${username}? A soothing meal can bring some calm. ☁️`;
+  } else if (mood === 'tired') {
+    message = `Feeling tired, ${username}? A healthy meal will help recharge your energy. 🌿`;
+  } else {
+    message = `Welcome back, ${username}! Hope you're doing well. 🍽️`;
   }
 
-  useEffect(() => {
-    GreetingMood({username,mood})
-  },[]);
+  setGreetings(message);
+}, [username, mood]);
 
 
   return (
     <>
-
       <div style={{ padding: '20px', fontSize: '20px', fontFamily: 'Arial' }}>
         {greetings}
       </div>
 
-      <div className="filter-conatainer">
-        <div className="mood-option">
-          <p className="mood-heading">select ur mood</p>
-          <select onChange={(e) => setMoodMeal(e.target.value)}>
-            <option>All</option>
-            <option>happy</option>
-            <option>sad</option>
-            <option>tired</option>
-            <option>anxious</option>
-            <option>bored</option>
-            <option>angry</option>
-            <option>hungry</option>
-          </select>
-        </div>
+      <div className="mood-card-container">
+        {moodOptions.map((option, index) => (
+          <div
+            key={index}
+            className={`mood-select-card ${moodMeal === option ? 'active' : ''}`}
+            onClick={() => setMoodMeal(option)}
+          >
+            {option.charAt(0).toUpperCase() + option.slice(1)}
+          </div>
+        ))}
       </div>
+
       <div className="mood-meal-container">
         <div className="container mt-4">
           <div className="row">
@@ -119,7 +105,6 @@ function MoodMeal() {
                     alt={`${item.type} mood`}
                   />
                   <div className="card-body">
-                    <h5 className="card-title text-capitalize">{item.type} Mood</h5>
                     <p className="card-text">Meals: {item.meals.join(", ")}</p>
                   </div>
                 </div>
@@ -128,10 +113,10 @@ function MoodMeal() {
           </div>
         </div>
       </div>
+
       <FooterSection />
     </>
   );
 }
-
 
 export default MoodMeal;
