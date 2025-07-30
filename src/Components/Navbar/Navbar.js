@@ -47,7 +47,7 @@ function Navbar() {
         <div className="navbar-right">
           <input className="search" type="text" placeholder="Search meals or moods..." />
 
-          <li className="signup-list" type="none">SignUp</li>
+          {/* <li className="signup-list" type="none">SignUp</li> */}
 
           {isAuthenticate ? (
             <button className="login-button-navbar" onClick={handleLogout}>Logout</button>
