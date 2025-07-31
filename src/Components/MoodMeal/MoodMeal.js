@@ -1,7 +1,8 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { lazy, useEffect, useMemo, useState } from "react";
 import './MoodMeal.css';
-import FooterSection from "../../FooterSection/FooterSection";
+// import FooterSection from "../../FooterSection/FooterSection";
 import { useSelector } from "react-redux";
+const FooterSection = lazy(() => import('../../FooterSection/FooterSection'))
 
 function MoodMeal() {
   const [moodMeal, setMoodMeal] = useState('');

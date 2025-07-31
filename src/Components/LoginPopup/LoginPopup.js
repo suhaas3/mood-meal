@@ -1,12 +1,7 @@
 
 import * as React from 'react';
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import Login from '../Login/Login';
+const Login = React.lazy(() => import('../Login/Login'))
+const Dialog = React.lazy(() => import('@mui/material/Dialog'))
 
 export default function LoginPopup({openLogin,setOpenLogin}) {
   const [open, setOpen] = React.useState(openLogin);

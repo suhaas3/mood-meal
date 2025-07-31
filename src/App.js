@@ -1,9 +1,10 @@
-import React from "react";
+import React, { lazy } from "react";
 import { BrowserRouter as Router,Routes,Route, Navigate } from "react-router-dom";
-import Navbar from "./Components/Navbar/Navbar";
-import Home from "./Components/Home/Home";
-import MoodMeal from "./Components/MoodMeal/MoodMeal";
 import { useSelector } from "react-redux";
+
+const Home = lazy(() => import('./Components/Home/Home'))
+const Navbar = lazy(() => import('./Components/Navbar/Navbar'))
+const MoodMeal = lazy(() => import('./Components/MoodMeal/MoodMeal'))
 
 function App() {
   const {isAuthenticate } = useSelector((state) => state.auth);
