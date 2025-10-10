@@ -2,7 +2,6 @@ import React, { lazy, useState } from 'react';
 import './MoodForm.css'; // Link to the CSS file
 // import Dialog from '@mui/material/Dialog';
 import { useDispatch } from 'react-redux';
-import { MoodMealForm } from '../Redux-toolkit/MoodFormSlice';
 import { useNavigate } from 'react-router-dom';
 const Dialog = lazy(() => import('@mui/material/Dialog'))
 
@@ -26,7 +25,6 @@ function MoodForm({ openMoodMealForm, setOpenMoodMealForm }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(MoodMealForm({username: formData.username, mood: formData.mood}))
     navigate('/moodmeal')
   };
 

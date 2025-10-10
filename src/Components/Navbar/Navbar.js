@@ -4,13 +4,11 @@ import { useNavigate, useLocation } from "react-router-dom";
 import LoginPopup from "../LoginPopup/LoginPopup";
 import { useDispatch, useSelector } from "react-redux";
 import SignUpPopup from "../SignUpPopup/SignUpPopup";
-import { Logut } from "../../Redux-toolkit/Reducers/AuthSlice";
 
 function Navbar() {
   const [openLogin, setOpenLogin] = useState(false);
   const [openSignUp, setOpenSignUp] = useState(false);
 
-  const { isAuthenticate } = useSelector((state) => state.auth);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -25,7 +23,6 @@ function Navbar() {
 
   const handleOpenLogin = () => setOpenLogin(prev => !prev);
   const handleSignUp = () => setOpenSignUp(prev => !prev);
-  const handleLogout = () => dispatch(Logut());
 
   return (
     <>
@@ -49,11 +46,11 @@ function Navbar() {
 
           {/* <li className="signup-list" type="none">SignUp</li> */}
 
-          {isAuthenticate ? (
-            <button className="login-button-navbar" onClick={handleLogout}>Logout</button>
-          ) : (
-            <button className="login-button-navbar" onClick={handleOpenLogin}>Login</button>
-          )}
+          {/* {isAuthenticate ? ( */}
+            <button className="login-button-navbar" >Logout</button>
+          {/*  ) : (
+             <button className="login-button-navbar" onClick={handleOpenLogin}>Login</button>
+           )} */}
         </div>
       </nav>
 

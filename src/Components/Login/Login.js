@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import './Login.css';
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { AuthLogin } from "../../Redux-toolkit/Reducers/AuthSlice";
 import TextField from '@mui/material/TextField';
 import Button from "@mui/material/Button";
 import './Login.css';
@@ -29,7 +28,6 @@ function Login({ setOpenLogin }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    dispatch(AuthLogin({ userName: loginDetails.userName, passWord: loginDetails.passWord }));
     setOpenLogin(prev => !prev);
   }
 

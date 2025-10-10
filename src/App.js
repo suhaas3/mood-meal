@@ -7,14 +7,14 @@ const Navbar = lazy(() => import('./Components/Navbar/Navbar'))
 const MoodMeal = lazy(() => import('./Components/MoodMeal/MoodMeal'))
 
 function App() {
-  const {isAuthenticate } = useSelector((state) => state.auth);
+
   return (
     <>
       <Router>
         <Navbar/>
         <Routes>
           <Route path="/" element={<Home/>}/>
-          {isAuthenticate && <Route path="/moodmeal" element={<MoodMeal/>} />}
+          {<Route path="/moodmeal" element={<MoodMeal/>} />}
         </Routes>
       </Router>
     </>

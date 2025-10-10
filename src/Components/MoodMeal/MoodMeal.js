@@ -9,7 +9,6 @@ function MoodMeal() {
   const [filteredMoodMeal, setFilteredOptionMoodMeal] = useState([]);
   const [greetings, setGreetings] = useState('');
 
-  const { username, mood } = useSelector((state) => state.mood.UserDetails);
 
   const mealData = [
     { type: "happy", meals: ["Fruit salad", "Pasta", "Smoothie"], image: "https://mojo.generalmills.com/api/public/content/bUCmBsXVSUuUFJy_6qQRWQ_gmi_hi_res_jpeg.jpeg?v=9bffdf1f&t=466b54bb264e48b199fc8e83ef1136b4" },
@@ -51,29 +50,29 @@ function MoodMeal() {
     setFilteredOptionMoodMeal(filtered);
   }, [moodMeal]);
 
-useEffect(() => {
-  let message;
+// useEffect(() => {
+//   let message;
 
-  if (mood === 'sad') {
-    message = `Hi ${username}, we noticed you're feeling sad. Let's brighten your day with a warm meal! 😊`;
-  } else if (mood === 'happy') {
-    message = `Great to see you happy, ${username}! Keep the good vibes going! 🌞`;
-  } else if (mood === 'angry') {
-    message = `Hey ${username}, take a deep breath. A good meal might help you feel better. 🍲`;
-  } else if (mood === 'hungry') {
-    message = `Hi ${username}, hunger calls! Let’s find something tasty for you. 🍕`;
-  } else if (mood === 'bored') {
-    message = `Bored, ${username}? Let’s spice things up with a fun meal experience! 🍜`;
-  } else if (mood === 'anxious') {
-    message = `Feeling anxious, ${username}? A soothing meal can bring some calm. ☁️`;
-  } else if (mood === 'tired') {
-    message = `Feeling tired, ${username}? A healthy meal will help recharge your energy. 🌿`;
-  } else {
-    message = `Welcome back, ${username}! Hope you're doing well. 🍽️`;
-  }
+//   if (mood === 'sad') {
+//     message = `Hi ${username}, we noticed you're feeling sad. Let's brighten your day with a warm meal! 😊`;
+//   } else if (mood === 'happy') {
+//     message = `Great to see you happy, ${username}! Keep the good vibes going! 🌞`;
+//   } else if (mood === 'angry') {
+//     message = `Hey ${username}, take a deep breath. A good meal might help you feel better. 🍲`;
+//   } else if (mood === 'hungry') {
+//     message = `Hi ${username}, hunger calls! Let’s find something tasty for you. 🍕`;
+//   } else if (mood === 'bored') {
+//     message = `Bored, ${username}? Let’s spice things up with a fun meal experience! 🍜`;
+//   } else if (mood === 'anxious') {
+//     message = `Feeling anxious, ${username}? A soothing meal can bring some calm. ☁️`;
+//   } else if (mood === 'tired') {
+//     message = `Feeling tired, ${username}? A healthy meal will help recharge your energy. 🌿`;
+//   } else {
+//     message = `Welcome back, ${username}! Hope you're doing well. 🍽️`;
+//   }
 
-  setGreetings(message);
-}, [username, mood]);
+//   setGreetings(message);
+// }, [username, mood]);
 
 
   return (
