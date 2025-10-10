@@ -46,11 +46,11 @@ function Navbar() {
 
           {/* <li className="signup-list" type="none">SignUp</li> */}
 
-          {/* {isAuthenticate ? ( */}
+          {/* {isAuthenticate ? (
             <button className="login-button-navbar" >Logout</button>
-          {/*  ) : (
+           ) : ( */}
              <button className="login-button-navbar" onClick={handleOpenLogin}>Login</button>
-           )} */}
+           {/* )} */}
         </div>
       </nav>
 

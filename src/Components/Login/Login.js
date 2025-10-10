@@ -1,21 +1,25 @@
 import React, { useEffect, useState } from "react";
+import axios from 'axios';
 import './Login.css';
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import TextField from '@mui/material/TextField';
 import Button from "@mui/material/Button";
 import './Login.css';
+import { BASE_URL } from "../../Utils/constants";
+import { color } from "@mui/system";
 
 
 function Login({ setOpenLogin }) {
   const [loginDetails, setLoginDetails] = useState({
-    userName: "",
-    passWord: ""
+    emailId: "virat@gmail.com",
+    passWord: "ViratChiku@123"
   });
+  const [error, setError] = useState("");
 
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   function handleLoginDetails(event) {
     const name = event.target.name;
@@ -26,9 +30,21 @@ function Login({ setOpenLogin }) {
     })
   }
 
-  function handleSubmit(event) {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    setOpenLogin(prev => !prev);
+
+    try {
+      setError("");
+      const res = await axios.post(BASE_URL + "/login", {
+        "emailId": loginDetails.emailId,
+        "password": loginDetails.passWord
+      },
+        { withCredentials: true })
+
+        console.log(res?.data);
+    } catch (err) {
+      setError("Invalid credentials!")
+    }
   }
 
   return (
@@ -36,9 +52,9 @@ function Login({ setOpenLogin }) {
       <div className="login-page">
         <div className="login-section">
           <div className="login-sub-section">
-            <TextField id="outlined-basic" className="userNameBox" label="UserName" name="userName" onChange={handleLoginDetails} variant="outlined" />
-            <TextField id="outlined-basic" className="passwordBox" label="PassWord" type="password" name="passWord" onChange={handleLoginDetails} variant="outlined" />
-
+            <TextField id="outlined-basic" className="userNameBox" label="emailId" type="email" name="emailId" value={loginDetails.emailId} onChange={handleLoginDetails} variant="outlined" />
+            <TextField id="outlined-basic" className="passwordBox" label="PassWord" type="password" name="passWord" value={loginDetails.passWord} onChange={handleLoginDetails} variant="outlined" />
+            <p style={{color: "red", margin: "4px" , fontSize: "14px"}}>{error}</p>
             <button onClick={handleSubmit} className="login-button-new">Login</button>
 
           </div>
