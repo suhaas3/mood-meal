@@ -8,6 +8,7 @@ import Button from "@mui/material/Button";
 import './Login.css';
 import { BASE_URL } from "../../Utils/constants";
 import { color } from "@mui/system";
+import { addUser } from "../../Redux-toolkit/Reducers/userSlice";
 
 
 function Login({ setOpenLogin }) {
@@ -19,7 +20,7 @@ function Login({ setOpenLogin }) {
 
 
   const navigate = useNavigate();
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   function handleLoginDetails(event) {
     const name = event.target.name;
@@ -41,7 +42,9 @@ function Login({ setOpenLogin }) {
       },
         { withCredentials: true })
 
-        console.log(res?.data);
+        dispatch(addUser(res?.data));
+        navigate("/");
+
     } catch (err) {
       setError("Invalid credentials!")
     }
