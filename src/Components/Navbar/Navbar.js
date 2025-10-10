@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import SignUpPopup from "../SignUpPopup/SignUpPopup";
 
 function Navbar() {
-  const [openLogin, setOpenLogin] = useState(false);
+  const [openLogin, setOpenLogin] = useState(true);
   const [openSignUp, setOpenSignUp] = useState(false);
 
 
@@ -15,7 +15,7 @@ function Navbar() {
   const dispatch = useDispatch();
 
   const links = [
-    { path: '/', name: 'Home' },
+    { path: '/home', name: 'Home' },
     { path: '/moodmeal', name: "MoodMeal" }
   ];
 

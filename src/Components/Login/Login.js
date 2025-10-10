@@ -43,7 +43,10 @@ function Login({ setOpenLogin }) {
         { withCredentials: true })
 
         dispatch(addUser(res?.data));
-        navigate("/");
+        if (res) {
+          setOpenLogin(false);
+        }
+        navigate("/home");
 
     } catch (err) {
       setError("Invalid credentials!")
