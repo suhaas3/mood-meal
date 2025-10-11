@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import './Navbar.css';
 import { useNavigate, useLocation } from "react-router-dom";
-import LoginPopup from "../LoginPopup/LoginPopup";
 import { useDispatch, useSelector } from "react-redux";
 
 function Navbar() {
@@ -14,7 +13,7 @@ function Navbar() {
 
   const links = [
     { path: '/home', name: 'Home' },
-    { path: '/moodmeal', name: "MoodMeal" }
+    { path: '/moodmeal', name: "MoodMeal" },
   ];
 
   const navigateFun = (path) => navigate(path);
@@ -37,21 +36,7 @@ function Navbar() {
             ))}
           </ul>
         </div>
-
-        <div className="navbar-right">
-          <input className="search" type="text" placeholder="Search meals or moods..." />
-
-          {/* <li className="signup-list" type="none">SignUp</li> */}
-
-          {/* {isAuthenticate ? (
-            <button className="login-button-navbar" >Logout</button>
-           ) : ( */}
-             <button className="login-button-navbar" onClick={handleOpenLogin}>Login</button>
-           {/* )} */}
-        </div>
       </nav>
-
-      {openLogin && <LoginPopup openLogin={openLogin} setOpenLogin={setOpenLogin} />}
     </>
   );
 }

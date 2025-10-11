@@ -1,92 +1,112 @@
-import React, { useEffect, useState } from "react";
-import axios from 'axios';
-import './Login.css';
+import React, { useState } from "react";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import TextField from '@mui/material/TextField';
-import './Login.css';
+import { useDispatch } from "react-redux";
+import TextField from "@mui/material/TextField";
+import { Eye, EyeOff } from "lucide-react";
 import { BASE_URL } from "../../Utils/constants";
 import { addUser } from "../../Redux-toolkit/Reducers/userSlice";
+import "./Login.css";
 
-
-function Login({ setOpenLogin }) {
+function Login() {
   const [loginDetails, setLoginDetails] = useState({
     emailId: "virat@gmail.com",
-    passWord: "ViratChiku@123"
+    passWord: "ViratChiku@123",
   });
   const [error, setError] = useState("");
-  const [openSignUp, setOpenSignUp] = useState(false);
   const [hover, setHover] = useState(false);
-
+  const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   function handleLoginDetails(event) {
-    const name = event.target.name;
-    const value = event.target.value;
+    const { name, value } = event.target;
     setLoginDetails({
       ...loginDetails,
-      [name]: value
-    })
+      [name]: value,
+    });
   }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     try {
       setError("");
-      const res = await axios.post(BASE_URL + "/login", {
-        "emailId": loginDetails.emailId,
-        "password": loginDetails.passWord
-      },
-        { withCredentials: true })
+      const res = await axios.post(
+        BASE_URL + "/login",
+        {
+          emailId: loginDetails.emailId,
+          password: loginDetails.passWord,
+        },
+        { withCredentials: true }
+      );
 
       dispatch(addUser(res?.data));
-      if (res) {
-        setOpenLogin(false);
-      }
       navigate("/home");
-
     } catch (err) {
-      setError("Invalid credentials!")
+      setError("Invalid credentials!");
     }
-  }
+  };
 
-  const handleSignUp =  () => {
-    setOpenLogin(false);
-  }
- 
   return (
-    <>
-      <div className="login-page">
-        <div className="login-section">
-          <div className="login-sub-section">
-            <TextField id="outlined-basic" className="userNameBox" label="emailId" type="email" name="emailId" value={loginDetails.emailId} onChange={handleLoginDetails} variant="outlined" />
-            <TextField id="outlined-basic" className="passwordBox" label="PassWord" type="password" name="passWord" value={loginDetails.passWord} onChange={handleLoginDetails} variant="outlined" />
-            <p style={{ color: "red", margin: "4px", fontSize: "14px" }}>{error}</p>
-            <button onClick={handleSubmit} className="login-button-new">Login</button>
+    <div className="login-page">
+      <div className="login-section">
+        <div className="login-sub-section">
+          <h2 className="login-title">Welcome Back 👋</h2>
 
-            <p
-              style={{
-                marginTop: "10px",
-                cursor: "pointer",
-                color: hover ? "green" : "black",
-                textDecoration: hover ? "underline": null,
-              }}
-              onMouseEnter={() => setHover(true)}
-              onMouseLeave={() => setHover(false)}
-              onClick={handleSignUp}
+          <TextField
+            className="userNameBox"
+            label="Email ID"
+            type="email"
+            name="emailId"
+            value={loginDetails.emailId}
+            onChange={handleLoginDetails}
+            variant="outlined"
+            fullWidth
+          />
+
+          {/* Password Field with Eye Icon */}
+          <div className="password-field">
+            <TextField
+              className="passwordBox"
+              label="Password"
+              type={showPassword ? "text" : "password"}
+              name="passWord"
+              value={loginDetails.passWord}
+              onChange={handleLoginDetails}
+              variant="outlined"
+              fullWidth
+            />
+            <span
+              className="eye-icon"
+              onClick={() => setShowPassword(!showPassword)}
             >
-              don't have an account? signUp
-            </p>
-
+              {showPassword ? <EyeOff size={22} /> : <Eye size={22} />}
+            </span>
           </div>
+
+          {error && <p className="error-text">{error}</p>}
+
+          <button onClick={handleSubmit} className="login-button-new">
+            Login
+          </button>
+
+          <p
+            className="signup-text"
+            onMouseEnter={() => setHover(true)}
+            onMouseLeave={() => setHover(false)}
+            style={{
+              color: hover ? "#1e90ff" : "#333",
+              textDecoration: hover ? "underline" : "none",
+            }}
+            onClick={() => navigate("/signup")}
+          >
+            Don’t have an account? <span>Sign Up</span>
+          </p>
         </div>
       </div>
-    </>
+    </div>
   );
-
 }
 
 export default Login;
