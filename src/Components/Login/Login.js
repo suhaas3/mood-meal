@@ -4,10 +4,8 @@ import './Login.css';
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import TextField from '@mui/material/TextField';
-import Button from "@mui/material/Button";
 import './Login.css';
 import { BASE_URL } from "../../Utils/constants";
-import { color } from "@mui/system";
 import { addUser } from "../../Redux-toolkit/Reducers/userSlice";
 
 
@@ -17,6 +15,8 @@ function Login({ setOpenLogin }) {
     passWord: "ViratChiku@123"
   });
   const [error, setError] = useState("");
+  const [openSignUp, setOpenSignUp] = useState(false);
+  const [hover, setHover] = useState(false);
 
 
   const navigate = useNavigate();
@@ -42,17 +42,21 @@ function Login({ setOpenLogin }) {
       },
         { withCredentials: true })
 
-        dispatch(addUser(res?.data));
-        if (res) {
-          setOpenLogin(false);
-        }
-        navigate("/home");
+      dispatch(addUser(res?.data));
+      if (res) {
+        setOpenLogin(false);
+      }
+      navigate("/home");
 
     } catch (err) {
       setError("Invalid credentials!")
     }
   }
 
+  const handleSignUp =  () => {
+    setOpenLogin(false);
+  }
+ 
   return (
     <>
       <div className="login-page">
@@ -60,8 +64,22 @@ function Login({ setOpenLogin }) {
           <div className="login-sub-section">
             <TextField id="outlined-basic" className="userNameBox" label="emailId" type="email" name="emailId" value={loginDetails.emailId} onChange={handleLoginDetails} variant="outlined" />
             <TextField id="outlined-basic" className="passwordBox" label="PassWord" type="password" name="passWord" value={loginDetails.passWord} onChange={handleLoginDetails} variant="outlined" />
-            <p style={{color: "red", margin: "4px" , fontSize: "14px"}}>{error}</p>
+            <p style={{ color: "red", margin: "4px", fontSize: "14px" }}>{error}</p>
             <button onClick={handleSubmit} className="login-button-new">Login</button>
+
+            <p
+              style={{
+                marginTop: "10px",
+                cursor: "pointer",
+                color: hover ? "green" : "black",
+                textDecoration: hover ? "underline": null,
+              }}
+              onMouseEnter={() => setHover(true)}
+              onMouseLeave={() => setHover(false)}
+              onClick={handleSignUp}
+            >
+              don't have an account? signUp
+            </p>
 
           </div>
         </div>
