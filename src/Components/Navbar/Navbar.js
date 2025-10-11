@@ -3,11 +3,9 @@ import './Navbar.css';
 import { useNavigate, useLocation } from "react-router-dom";
 import LoginPopup from "../LoginPopup/LoginPopup";
 import { useDispatch, useSelector } from "react-redux";
-import SignUpPopup from "../SignUpPopup/SignUpPopup";
 
 function Navbar() {
   const [openLogin, setOpenLogin] = useState(true);
-  const [openSignUp, setOpenSignUp] = useState(false);
 
 
   const navigate = useNavigate();
@@ -22,7 +20,6 @@ function Navbar() {
   const navigateFun = (path) => navigate(path);
 
   const handleOpenLogin = () => setOpenLogin(prev => !prev);
-  const handleSignUp = () => setOpenSignUp(prev => !prev);
 
   return (
     <>
@@ -55,7 +52,6 @@ function Navbar() {
       </nav>
 
       {openLogin && <LoginPopup openLogin={openLogin} setOpenLogin={setOpenLogin} />}
-      {/* {openSignUp && <SignUpPopup setOpenSignUp={setOpenSignUp} openSignUp={openSignUp} />} */}
     </>
   );
 }
