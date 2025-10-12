@@ -1,43 +1,114 @@
-import React, { useState } from "react";
-import './Navbar.css';
+import React, { useState, useEffect, useRef } from "react";
+import "./Navbar.css";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import axios from "axios";
+import { BASE_URL } from "../../Utils/constants";
+import { removeUser } from "../../Redux-toolkit/Reducers/userSlice";
 
 function Navbar() {
-  const [openLogin, setOpenLogin] = useState(true);
-
-
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
+  const dropdownRef = useRef(null);
 
   const links = [
-    { path: '/home', name: 'Home' },
-    { path: '/moodmeal', name: "MoodMeal" },
+    { path: "/home", name: "Home" },
+    { path: "/moodmeal", name: "MoodMeal" },
   ];
 
-  const navigateFun = (path) => navigate(path);
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
-  const handleOpenLogin = () => setOpenLogin(prev => !prev);
+  const handleProfileClick = () => {
+    setDropdownOpen((prev) => !prev);
+  };
+
+  const handleOptionClick = (option) => {
+    setDropdownOpen(false);
+    switch (option) {
+      case "profile":
+        navigate("/profile");
+        break;
+      case "changepassword":
+        navigate("/change-password");
+        break;
+      case "forgotpassword":
+        navigate("/forgot-password");
+        break;
+      case "logout":
+        navigate("/");
+        break;
+      default:
+        break;
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      await axios.post(BASE_URL + '/logout', {}, {
+        withCredentials: true
+      })
+
+      dispatch(removeUser());
+      navigate('/');
+    } catch (err) {
+      //ERROR logic maybe redirect to error page
+      navigate('/login');
+    }
+  }
 
   return (
-    <>
-      <nav className="navbar-section">
-        <div className="navbar-left">
-          <ul className="nav-lists">
-            {links.map((item, index) => (
-              <li
-                key={index}
-                className={`lists ${location.pathname === item.path ? 'active-link' : ''}`}
-                onClick={() => navigateFun(item.path)}
-              >
-                {item.name}
-              </li>
-            ))}
-          </ul>
+    <nav className="navbar-section">
+      <div className="navbar-left">
+        <ul className="nav-lists">
+          {links.map((item, index) => (
+            <li
+              key={index}
+              className={`lists ${location.pathname === item.path ? "active-link" : ""
+                }`}
+              onClick={() => navigate(item.path)}
+            >
+              {item.name}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* ✅ Profile Icon + Dropdown */}
+      <div className="navbar-right" ref={dropdownRef}>
+        <div className="profile-container">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+            alt="profile"
+            className="profile-logo"
+            onClick={handleProfileClick}
+          />
+
+          {dropdownOpen && (
+            <div className="dropdown-menu">
+              <p onClick={() => handleOptionClick("profile")}>Profile</p>
+              <p onClick={() => handleOptionClick("changepassword")}>
+                Change Password
+              </p>
+              <p onClick={() => handleOptionClick("forgotpassword")}>
+                Forgot Password
+              </p>
+              <p onClick={handleLogout}>Logout</p>
+            </div>
+          )}
         </div>
-      </nav>
-    </>
+      </div>
+    </nav>
   );
 }
 
