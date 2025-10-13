@@ -1,118 +1,146 @@
-/* --- Navbar Layout --- */
+/* 🌈 Fixed Glass Gradient Navbar */
 .navbar-section {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: linear-gradient(to right, #f7b733, #fc4a1a);
-  color: white;
-  padding: 15px 30px;
-  flex-wrap: wrap;
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 100;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  left: 0;
+  width: 100%;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 60px;
+  background: linear-gradient(90deg, rgba(255, 215, 150, 0.5), rgba(255, 182, 193, 0.5));
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
 }
 
+/* 🔹 Left Section */
 .navbar-left {
   display: flex;
   align-items: center;
   gap: 40px;
 }
 
+/* 🔹 Logo */
+.navbar-logo {
+  font-size: 22px;
+  font-weight: 700;
+  color: #ffd369;
+  cursor: pointer;
+  letter-spacing: 1px;
+}
+
+/* 🔹 Nav Links */
 .nav-lists {
+  list-style: none;
   display: flex;
   gap: 30px;
-  list-style: none;
   margin: 0;
   padding: 0;
 }
 
 .lists {
+  font-size: 16px;
+  color: #333;
   cursor: pointer;
-  font-size: 17px;
-  font-family: 'Segoe UI', sans-serif;
-  transition: color 0.3s ease;
+  position: relative;
+  font-weight: 500;
+  transition: all 0.3s ease-in-out;
 }
 
 .lists:hover {
-  color: #222;
+  color: #ffd369;
+}
+
+.lists::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: #ffd369;
+  transition: width 0.3s;
+}
+
+.lists:hover::after,
+.active-link::after {
+  width: 100%;
 }
 
 .active-link {
-  border-bottom: 3px solid white;
-  padding-bottom: 3px;
+  color: #ffd369;
 }
 
-/* --- Profile Section --- */
+/* 🔹 Right Section */
 .navbar-right {
   display: flex;
   align-items: center;
   position: relative;
 }
 
+/* Profile Image */
 .profile-container {
   position: relative;
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .profile-logo {
-  height: 45px;
   width: 45px;
+  height: 45px;
   border-radius: 50%;
+  object-fit: cover;
   cursor: pointer;
-  border: 2px solid white;
-  transition: transform 0.2s ease;
+  border: 2px solid #ff6969;
+  transition: transform 0.3s ease;
 }
 
 .profile-logo:hover {
-  transform: scale(1.05);
+  transform: scale(1.08);
 }
 
-/* --- Dropdown Menu --- */
+/* 🔹 Dropdown Menu */
 .dropdown-menu {
   position: absolute;
-  top: 55px; /* 👈 directly below the profile icon */
+  top: 60px;
   right: 0;
-  left: -110px;
-  background: white;
-  color: #333;
+  background: rgba(30, 30, 30, 0.95);
+  color: white;
   border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  width: 180px;
-  display: flex;
-  flex-direction: column;
   overflow: hidden;
-  animation: fadeIn 0.2s ease-in-out;
-  z-index: 200;
-}
-
-.dropdown-menu::before {
-  content: "";
-  position: absolute;
-  top: -8px;
-  right: 18px;
-  border-width: 0 8px 8px 8px;
-  border-style: solid;
-  border-color: transparent transparent white transparent;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  width: 180px;
+  animation: fadeIn 0.3s ease;
+  z-index: 2000;
 }
 
 .dropdown-menu p {
-  padding: 12px 16px;
   margin: 0;
-  font-size: 15px;
+  padding: 12px 16px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: background 0.3s;
+  font-size: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dropdown-menu p:last-child {
+  border-bottom: none;
 }
 
 .dropdown-menu p:hover {
-  background-color: #f4f4f4;
+  background: #ffd369;
+  color: #000;
 }
 
-/* --- Animation --- */
+/* 🔹 Animation */
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(-5px);
+    transform: translateY(-8px);
   }
   to {
     opacity: 1;
@@ -120,26 +148,17 @@
   }
 }
 
-/* --- Mobile Responsive --- */
+/* 🔹 Responsive */
 @media (max-width: 768px) {
   .navbar-section {
-    flex-direction: column;
-    align-items: flex-start;
+    padding: 0 25px;
   }
 
-  .navbar-left {
-    width: 100%;
-    justify-content: space-between;
+  .nav-lists {
+    gap: 20px;
   }
 
-  .navbar-right {
-    width: 100%;
-    flex-direction: column;
-    align-items: flex-end;
-    margin-top: 10px;
-  }
-
-  .dropdown-menu {
-    right: 10px;
+  .lists {
+    font-size: 15px;
   }
 }

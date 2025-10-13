@@ -1,0 +1,70 @@
+/* Background layout */
+.profile-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Card styling */
+.profile-card {
+   background: transparent;
+  width: 400px;
+  padding: 30px 40px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  transition: 0.3s ease;
+}
+
+.profile-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+}
+
+/* Title */
+.profile-title {
+  text-align: center;
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 25px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Info styling */
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.info-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f7f7f7;
+  padding: 10px 14px;
+  border-radius: 10px;
+}
+
+.info-group label {
+  color: #555;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.info-group span {
+  color: #333;
+  font-size: 0.95rem;
+}
+
+/* About text */
+.about-text {
+  color: #444;
+  background: #f0f0f0;
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 8px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}

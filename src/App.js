@@ -2,6 +2,7 @@ import React, { lazy } from "react";
 import { BrowserRouter as Router,Routes,Route, Navigate } from "react-router-dom";
 import SignUp from "./Components/SignUp/SignUp";
 import { LogIn } from "lucide-react";
+import Profile from "./Components/Profile/Profile";
 
 const Home = lazy(() => import('./Components/Home/Home'))
 const Navbar = lazy(() => import('./Components/Navbar/Navbar'))
@@ -19,6 +20,7 @@ function App() {
           <Route path="/home" element={<Home/>}/>
           <Route path="/moodmeal" element={<MoodMeal/>} />
           <Route path="/signup" element={<SignUp/>} />
+          <Route path="/profile" element={<Profile/>} />
         </Routes>
       </Router>
     </>

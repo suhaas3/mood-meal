@@ -62,7 +62,6 @@ function Navbar() {
       dispatch(removeUser());
       navigate('/');
     } catch (err) {
-      //ERROR logic maybe redirect to error page
       navigate('/login');
     }
   }
