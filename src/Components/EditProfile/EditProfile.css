@@ -1,0 +1,88 @@
+.edit-profile-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  background: #fff;
+}
+
+.edit-profile-card {
+  width: 400px;
+  background: linear-gradient(135deg, #ffd2b1, #ffb5c3);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  padding: 30px;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease;
+}
+
+.edit-profile-card:hover {
+  transform: translateY(-4px);
+}
+
+.edit-profile-card h2 {
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 25px;
+}
+
+/* Grid Layout for side-by-side fields */
+.edit-profile-card .form-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+/* Generic form styling */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  flex: 1;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 10px 12px;
+  border: none;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  font-size: 0.95rem;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  box-shadow: 0 0 0 2px #ffb5c3;
+}
+
+/* Save button */
+.save-btn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #ff9966, #ff5e62);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.save-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}

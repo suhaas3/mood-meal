@@ -1,0 +1,41 @@
+.user-profile-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 50px;
+  padding: 100px 200px;
+  min-height: 100vh;
+
+  /* 🎨 Soft gradient background */
+  background: linear-gradient(135deg, #f7f9fc 0%, #e3f2fd 100%);
+}
+
+/* Optional: If you want the whole section to look like a card */
+.user-profile-card > * {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  padding: 30px;
+  width: 100%;
+  max-width: 500px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.user-profile-card > *:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* 📱 Responsive design */
+@media (max-width: 900px) {
+  .user-profile-card {
+    flex-direction: column;
+    align-items: center;
+    padding: 60px 20px;
+  }
+
+  .user-profile-card > * {
+    max-width: 100%;
+  }
+}

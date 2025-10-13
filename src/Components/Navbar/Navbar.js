@@ -83,7 +83,7 @@ function Navbar() {
 
       {/* ✅ Profile Dropdown */}
       <div className="navbar-right" ref={dropdownRef}>
-        <div className="profile-container" onClick={handleProfileClick}>
+        <div className="profile-container-navbar" onClick={handleProfileClick}>
           <img
             src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
             alt="Profile"
