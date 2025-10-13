@@ -46,7 +46,7 @@ function Navbar() {
         navigate("/forgot-password");
         break;
       case "logout":
-        navigate("/");
+        handleLogout();
         break;
       default:
         break;
@@ -55,16 +55,13 @@ function Navbar() {
 
   const handleLogout = async () => {
     try {
-      await axios.post(BASE_URL + '/logout', {}, {
-        withCredentials: true
-      })
-
+      await axios.post(`${BASE_URL}/logout`, {}, { withCredentials: true });
       dispatch(removeUser());
-      navigate('/');
+      navigate("/");
     } catch (err) {
-      navigate('/login');
+      navigate("/login");
     }
-  }
+  };
 
   return (
     <nav className="navbar-section">
@@ -73,8 +70,9 @@ function Navbar() {
           {links.map((item, index) => (
             <li
               key={index}
-              className={`lists ${location.pathname === item.path ? "active-link" : ""
-                }`}
+              className={`lists ${
+                location.pathname === item.path ? "active-link" : ""
+              }`}
               onClick={() => navigate(item.path)}
             >
               {item.name}
@@ -83,28 +81,24 @@ function Navbar() {
         </ul>
       </div>
 
-      {/* ✅ Profile Icon + Dropdown */}
+      {/* ✅ Profile Dropdown */}
       <div className="navbar-right" ref={dropdownRef}>
-        <div className="profile-container">
+        <div className="profile-container" onClick={handleProfileClick}>
           <img
             src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
-            alt="profile"
+            alt="Profile"
             className="profile-logo"
-            onClick={handleProfileClick}
           />
-
-          {dropdownOpen && (
-            <div className="dropdown-menu">
-              <p onClick={() => handleOptionClick("profile")}>Profile</p>
-              <p onClick={() => handleOptionClick("changepassword")}>
-                Change Password
-              </p>
-              <p onClick={() => handleOptionClick("forgotpassword")}>
-                Forgot Password
-              </p>
-              <p onClick={handleLogout}>Logout</p>
-            </div>
-          )}
+          <div className={`dropdown-menu ${dropdownOpen ? "show" : ""}`}>
+            <p onClick={() => handleOptionClick("profile")}>Profile</p>
+            <p onClick={() => handleOptionClick("changepassword")}>
+              Change Password
+            </p>
+            <p onClick={() => handleOptionClick("forgotpassword")}>
+              Forgot Password
+            </p>
+            <p onClick={handleLogout}>Logout</p>
+          </div>
         </div>
       </div>
     </nav>
