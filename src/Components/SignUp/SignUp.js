@@ -29,7 +29,7 @@ const SignUp = () => {
   // };
 
   const openLogin = () => {
-    navigate('/')
+    navigate('/login')
   }
 
   console.log(form);

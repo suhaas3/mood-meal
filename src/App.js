@@ -4,7 +4,6 @@ import SignUp from "./Components/SignUp/SignUp";
 import Profile from "./Components/Profile/Profile";
 import UserProfileCard from "./Components/UserProfileCard/UserProfileCard";
 import PasswordChange from "./Components/PasswordChange/PasswordChange";
-import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 
 const Home = lazy(() => import('./Components/Home/Home'))
 const Navbar = lazy(() => import('./Components/Navbar/Navbar'))
@@ -24,6 +23,7 @@ function App() {
           <Route path="/signup" element={<SignUp/>} />
           <Route path="/profile" element={<UserProfileCard/>} />
           <Route path="/change-password" element={<PasswordChange/>} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
         </Routes>
       </Router>
     </>

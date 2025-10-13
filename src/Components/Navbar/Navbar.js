@@ -98,9 +98,6 @@ function Navbar() {
             <p onClick={handlePasswordChange}>
               Change Password
             </p>
-            <p onClick={() => handleOptionClick("forgotpassword")}>
-              Forgot Password
-            </p>
             <p onClick={handleLogout}>Logout</p>
           </div>
         </div>
