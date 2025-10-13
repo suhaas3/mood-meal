@@ -16,6 +16,7 @@ function Login() {
   const [error, setError] = useState("");
   const [hover, setHover] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -32,6 +33,9 @@ function Login() {
     event.preventDefault();
     try {
       setError("");
+
+      if (loading) return; // prevents double click
+
       const res = await axios.post(
         BASE_URL + "/login",
         {
@@ -45,6 +49,8 @@ function Login() {
       navigate("/home");
     } catch (err) {
       setError("Invalid credentials!");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -87,7 +93,7 @@ function Login() {
 
           {error && <p className="error-text">{error}</p>}
 
-          <button onClick={handleSubmit} className="login-button-new">
+          <button onClick={handleSubmit} className="login-button-new" disabled={loading}>
             Login
           </button>
 

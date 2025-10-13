@@ -57,11 +57,15 @@ function Navbar() {
     try {
       await axios.post(`${BASE_URL}/logout`, {}, { withCredentials: true });
       dispatch(removeUser());
-      navigate("/");
+      navigate("/login");
     } catch (err) {
       navigate("/login");
     }
   };
+
+  const handlePasswordChange = () => {
+    navigate('/change-password')
+  }
 
   return (
     <nav className="navbar-section">
@@ -91,7 +95,7 @@ function Navbar() {
           />
           <div className={`dropdown-menu ${dropdownOpen ? "show" : ""}`}>
             <p onClick={() => handleOptionClick("profile")}>Profile</p>
-            <p onClick={() => handleOptionClick("changepassword")}>
+            <p onClick={handlePasswordChange}>
               Change Password
             </p>
             <p onClick={() => handleOptionClick("forgotpassword")}>
