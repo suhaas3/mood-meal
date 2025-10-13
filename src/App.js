@@ -23,7 +23,6 @@ function App() {
           <Route path="/signup" element={<SignUp/>} />
           <Route path="/profile" element={<UserProfileCard/>} />
           <Route path="/change-password" element={<PasswordChange/>} />
-            <Route path="/forgot-password" element={<ForgotPassword />} />
         </Routes>
       </Router>
     </>

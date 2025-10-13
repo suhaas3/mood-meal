@@ -109,24 +109,6 @@ function Login() {
           >
             Don’t have an account? <span>Sign Up</span>
           </p>
-
-          <p
-            className="password-change"
-            style={{
-              color: hover ? "#ff1e1eff" : "#333",
-              textDecoration: hover ? "underline" : "none",
-              cursor: "pointer",
-              textAlign: "center"
-            }}
-            onClick={() => navigate("/forgot-password")}
-          >
-            Forgot Password? <span style={{
-              color: hover ? "#ff1e1eff" : "#333",
-              textDecoration: hover ? "underline" : "none",
-              cursor: "pointer",
-            }} onMouseEnter={() => setHover(true)}
-              onMouseLeave={() => setHover(false)}>click here</span>
-          </p>
         </div>
       </div>
     </div>
