@@ -32,7 +32,6 @@ const SignUp = () => {
     navigate('/login')
   }
 
-  console.log(form);
   const handleSignUp = async (e) => {
     
       e.preventDefault(); // stops page reload
@@ -52,7 +51,7 @@ const SignUp = () => {
 
       navigate('/home');
     } catch (err) {
-      setError("Invalid Details!");
+      setError(err?.response?.data);
     }
   }
 
@@ -118,7 +117,7 @@ const SignUp = () => {
             </div>
           </div>
 
-          {error && <p>{error}</p>}
+          {error && <p style={{fontSize:"13px", color:"red", fontFamily: "arial"}}>{error}</p>}
 
           <button type="submit" className="signup-btn" onClick={handleSignUp}>
             Sign Up
