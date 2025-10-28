@@ -6,7 +6,7 @@ import FooterSection from "../../FooterSection/FooterSection";
 
 function Home() {
   const navigate = useNavigate();
-  const user = useSelector((state) => state.user); // Redux store user data
+  const user = useSelector((state) => state.user.userData); // Redux store user data
 
   // Redirect to login if not logged in
   useEffect(() => {

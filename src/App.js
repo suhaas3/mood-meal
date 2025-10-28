@@ -4,6 +4,7 @@ import SignUp from "./Components/SignUp/SignUp";
 import Profile from "./Components/Profile/Profile";
 import UserProfileCard from "./Components/UserProfileCard/UserProfileCard";
 import PasswordChange from "./Components/PasswordChange/PasswordChange";
+import { useSelector } from "react-redux";
 
 const Home = lazy(() => import('./Components/Home/Home'))
 const Navbar = lazy(() => import('./Components/Navbar/Navbar'))
@@ -12,6 +13,8 @@ const Login = lazy(() => import('./Components/Login/Login'))
 
 function App() {
 
+  const {isAuthenticate} = useSelector((state) => state.user)
+
   return (
     <>
       <Router>
@@ -19,10 +22,10 @@ function App() {
         <Routes>
           <Route path="/" element={<Login/>} />
           <Route path="/home" element={<Home/>}/>
-          <Route path="/moodmeal" element={<MoodMeal/>} />
+          <Route path="/moodmeal" element={isAuthenticate && (<MoodMeal/>)} />
           <Route path="/signup" element={<SignUp/>} />
-          <Route path="/profile" element={<UserProfileCard/>} />
-          <Route path="/change-password" element={<PasswordChange/>} />
+          <Route path="/profile" element={isAuthenticate && <UserProfileCard/>} />
+          <Route path="/change-password" element={isAuthenticate && <PasswordChange/>} />
         </Routes>
       </Router>
     </>

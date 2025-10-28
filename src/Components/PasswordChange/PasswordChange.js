@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./PasswordChange.css";
 import { BASE_URL } from "../../Utils/constants";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const PasswordChange = () => {
   const [password, setPassword] = useState("");

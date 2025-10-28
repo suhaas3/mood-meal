@@ -8,7 +8,7 @@ import Footer from '../../FooterSection/FooterSection';
 const UserProfileCard = () => {
 
    // Access user data from Redux store
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.user.userData);
 
   return (
     <>
