@@ -1,61 +1,80 @@
-import React, { useState } from 'react';
-import './Home.css';
+import React, { useEffect } from "react";
+import "./Home.css";
 import { useNavigate } from "react-router-dom";
-import { Smile, Clock, Activity } from 'lucide-react';
-import FooterSection from '../../FooterSection/FooterSection';
-import { useSelector } from 'react-redux';
-import MoodForm from '../../MoodForm/MoodForm';
-import Dialog from '@mui/material/Dialog';
+import { useSelector } from "react-redux";
+import FooterSection from "../../FooterSection/FooterSection";
 
 function Home() {
-  const [openMoodMealForm, setOpenMoodMealForm] = useState(false);
-  const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
+  const user = useSelector((state) => state.user); // Redux store user data
 
+  // Redirect to login if not logged in
+  useEffect(() => {
+    if (!user || !user._id) {
+      navigate("/login"); // redirect if not logged in
+    }
+  }, [user, navigate]);
 
-
-  const openMoodForm = () => {
-    setOpenMoodMealForm(prev => !prev);
+  // Prevent UI flicker while checking login
+  if (!user || !user._id) {
+    return null;
   }
 
-  const handleClose = () => {
-    setOpen(false);
+  const handleNavigateMoodMeal = () => {
+    navigate("/moodmeal");
   };
-
 
   return (
     <>
       <div className="homepage">
-        {/* <div className='welcome-user'>
-          <h2 style={{ textAlign: 'center', marginTop: '20px', color: '#333' }}>
-            Welcome, <span style={{ color: '#ff6600' }}>{userName}</span>!
+        {/* ✅ Welcome Section */}
+        <div className="welcome-user">
+          <h2 style={{ textAlign: "center", marginTop: "40px", color: "#333" }}>
+            👋 Welcome,&nbsp;
+            <span style={{ color: "#ff6600", textTransform: "capitalize" }}>
+              {user.firstName} {user.lastName}
+            </span>
+            !
           </h2>
-          <h2 style={{ textAlign: "center", fontFamily: "arial", fontSize: "16px", color: "#333" }}>Please Login using right side top Login button and then Click the below Get Start button</h2>
+          <p
+            style={{
+              textAlign: "center",
+              fontFamily: "Arial",
+              fontSize: "16px",
+              color: "#555",
+            }}
+          >
+            Glad to have you back on <b>MoodMeal</b> 🍽️
+          </p>
+        </div>
 
-        </div> */}
+        {/* ✅ Centered Button */}
+        <div style={{ textAlign: "center", marginTop: "30px" }}>
+          <button
+            onClick={handleNavigateMoodMeal}
+            style={{
+              backgroundColor: "#ff6600",
+              color: "#fff",
+              border: "none",
+              borderRadius: "8px",
+              padding: "12px 24px",
+              fontSize: "16px",
+              cursor: "pointer",
+              transition: "background-color 0.3s",
+            }}
+            onMouseOver={(e) => (e.target.style.backgroundColor = "#e55d00")}
+            onMouseOut={(e) => (e.target.style.backgroundColor = "#ff6600")}
+          >
+            🚀 Get Started
+          </button>
+        </div>
+
         {/* Hero Section */}
         <section className="hero">
           <h1 className="hero-title">MoodMeal</h1>
-          <p className="hero-quote">“Track your mood. Choose your meal. Transform your life.”</p>
-
-          {/* {isAuthenticate ? (
-            <>
-              <button className="hero-button" onClick={openMoodForm}>Get Started</button>
-              {openMoodMealForm && (
-                <MoodForm
-                  openMoodMealForm={openMoodMealForm}
-                  setOpenMoodMealForm={setOpenMoodMealForm}
-                />
-              )}
-            </>
-          ) : (
-            <div style={{ color: 'red' }}>
-              Error: You must be logged in to access this feature.
-            </div>
-          )} */}
-
-          {/* <button className="hero-button" onClick={openMoodForm}>Get Started</button>  */}
-
+          <p className="hero-quote">
+            “Track your mood. Choose your meal. Transform your life.”
+          </p>
         </section>
 
         {/* Features Section */}
@@ -63,46 +82,43 @@ function Home() {
           <h2 className="features-heading">How MoodMeal Helps</h2>
           <div className="feature-list">
             <Feature
-              icon={<Smile className="feature-icon pink" />}
+              icon="😊"
               title="Log Your Mood"
               description="Capture how you feel before you eat."
+              navigate={navigate}
             />
             <Feature
-              icon={<Clock className="feature-icon yellow" />}
+              icon="⏰"
               title="Track Meal Patterns"
               description="Spot trends in emotional eating habits."
+              navigate={navigate}
             />
             <Feature
-              icon={<Activity className="feature-icon green" />}
+              icon="💪"
               title="Improve Wellness"
               description="Build awareness and balance with food."
+              navigate={navigate}
             />
           </div>
         </section>
       </div>
-      <FooterSection />
-      {/* {isAuthenticate ? (openMoodMealForm && <MoodForm openMoodMealForm={openMoodMealForm} setOpenMoodMealForm={setOpenMoodMealForm} />) : (
-        <div style={{ color: 'red' }}>Error: You must be logged in to access this feature.</div>
-      )
-      } */}
 
+      <FooterSection />
     </>
   );
 }
 
-function Feature({ icon, title, description }) {
-  const navigate = useNavigate();
+function Feature({ icon, title, description, navigate }) {
   const navigateToMoodMeal = () => {
-    navigate('/moodmeal')
-  }
+    navigate("/moodmeal");
+  };
+
   return (
-    <>
-      <div className="feature-box" onClick={() => navigateToMoodMeal('/moodmeal')}>
-        <div className="feature-icon-container">{icon}</div>
-        <h3 className="feature-title">{title}</h3>
-        <p className="feature-desc">{description}</p>
-      </div>
-    </>
+    <div className="feature-box" onClick={navigateToMoodMeal}>
+      <div className="feature-icon-container">{icon}</div>
+      <h3 className="feature-title">{title}</h3>
+      <p className="feature-desc">{description}</p>
+    </div>
   );
 }
 
