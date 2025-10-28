@@ -1,14 +1,15 @@
-import React, { lazy, useEffect, useMemo, useState } from "react";
-import './MoodMeal.css';
-// import FooterSection from "../../FooterSection/FooterSection";
+import React, { lazy, useEffect, useState } from "react";
+import "./MoodMeal.css";
 import { useSelector } from "react-redux";
-const FooterSection = lazy(() => import('../../FooterSection/FooterSection'))
+
+const FooterSection = lazy(() => import("../../FooterSection/FooterSection"));
 
 function MoodMeal() {
-  const [moodMeal, setMoodMeal] = useState('');
+  const [moodMeal, setMoodMeal] = useState("");
   const [filteredMoodMeal, setFilteredOptionMoodMeal] = useState([]);
-  const [greetings, setGreetings] = useState('');
+  const [greetings, setGreetings] = useState("");
 
+  const user = useSelector((state) => state.user);
 
   const mealData = [
     { type: "happy", meals: ["Fruit salad", "Pasta", "Smoothie"], image: "https://mojo.generalmills.com/api/public/content/bUCmBsXVSUuUFJy_6qQRWQ_gmi_hi_res_jpeg.jpeg?v=9bffdf1f&t=466b54bb264e48b199fc8e83ef1136b4" },
@@ -45,47 +46,68 @@ function MoodMeal() {
 
   const moodOptions = ["happy", "sad", "hungry", "angry", "bored", "anxious", "tired"];
 
+  // ✅ Health tips based on mood
+  const healthTips = {
+    happy: [
+      "Keep spreading positivity! Stay hydrated and enjoy fresh fruits to keep your energy up. 🍎",
+      "Go outdoors for a walk or sunlight exposure — it helps maintain your good mood. 🌞",
+      "Listen to your favorite music or dance — it boosts serotonin naturally! 🎶",
+    ],
+    sad: [
+      "Try some comfort food, but balance it with a walk or meditation to lift your mood. 🌤️",
+      "Stay connected — talk to a friend or family member about how you feel. 💬",
+      "Include mood-boosting foods like dark chocolate or nuts in moderation. 🍫",
+    ],
+    hungry: [
+      "Eat balanced meals with protein, fiber, and healthy fats — avoid skipping breakfast! 🥗",
+      "Drink a glass of water before meals to prevent overeating. 💧",
+      "Prefer homemade food over processed snacks for steady energy levels. 🍛",
+    ],
+    angry: [
+      "Drink cool water or herbal tea. Avoid spicy or oily foods that might worsen irritation. 🌿",
+      "Take slow, deep breaths or go for a short walk to calm your mind. 🌬️",
+      "Include magnesium-rich foods like bananas or spinach to ease tension. 🍌",
+    ],
+    bored: [
+      "Keep your hands and mind busy — try cooking something new or exercising lightly. 💪",
+      "Snack on crunchy veggies or nuts instead of junk food. 🥕",
+      "Try a new hobby or explore a creative outlet to stay engaged. 🎨",
+    ],
+    anxious: [
+      "Breathe deeply and eat magnesium-rich foods like bananas or dark chocolate. 🍌",
+      "Limit caffeine and processed sugar — they can increase anxiety. ☕🚫",
+      "Practice mindfulness or short breathing exercises daily. 🧘‍♀️",
+    ],
+    tired: [
+      "Take short breaks and hydrate often. Try oats, nuts, and green tea for a quick refresh. ☕",
+      "Ensure 7–8 hours of quality sleep — rest is essential for energy. 🌙",
+      "Stretch or take a 10-minute walk to improve blood flow and alertness. 🚶‍♀️",
+    ],
+  };
+
   useEffect(() => {
-    const filtered = mealData.filter(item => item.type === moodMeal);
+    const filtered = mealData.filter((item) => item.type === moodMeal);
     setFilteredOptionMoodMeal(filtered);
-  }, [moodMeal]);
 
-// useEffect(() => {
-//   let message;
-
-//   if (mood === 'sad') {
-//     message = `Hi ${username}, we noticed you're feeling sad. Let's brighten your day with a warm meal! 😊`;
-//   } else if (mood === 'happy') {
-//     message = `Great to see you happy, ${username}! Keep the good vibes going! 🌞`;
-//   } else if (mood === 'angry') {
-//     message = `Hey ${username}, take a deep breath. A good meal might help you feel better. 🍲`;
-//   } else if (mood === 'hungry') {
-//     message = `Hi ${username}, hunger calls! Let’s find something tasty for you. 🍕`;
-//   } else if (mood === 'bored') {
-//     message = `Bored, ${username}? Let’s spice things up with a fun meal experience! 🍜`;
-//   } else if (mood === 'anxious') {
-//     message = `Feeling anxious, ${username}? A soothing meal can bring some calm. ☁️`;
-//   } else if (mood === 'tired') {
-//     message = `Feeling tired, ${username}? A healthy meal will help recharge your energy. 🌿`;
-//   } else {
-//     message = `Welcome back, ${username}! Hope you're doing well. 🍽️`;
-//   }
-
-//   setGreetings(message);
-// }, [username, mood]);
-
+    if (moodMeal) {
+      setGreetings(`Hi ${user?.firstName || "there"}, here are some ${moodMeal} mood meal ideas!`);
+    } else {
+      setGreetings("");
+    }
+  }, [moodMeal, user]);
 
   return (
     <>
-      <div style={{ padding: '20px', fontSize: '20px', fontFamily: 'Arial' }}>
+      <div style={{ padding: "20px", fontSize: "20px", fontFamily: "Arial" }}>
         {greetings}
       </div>
 
+      {/* ✅ Mood Selection Buttons */}
       <div className="mood-card-container">
         {moodOptions.map((option, index) => (
           <div
             key={index}
-            className={`mood-select-card ${moodMeal === option ? 'active' : ''}`}
+            className={`mood-select-card ${moodMeal === option ? "active" : ""}`}
             onClick={() => setMoodMeal(option)}
           >
             {option.charAt(0).toUpperCase() + option.slice(1)}
@@ -93,6 +115,7 @@ function MoodMeal() {
         ))}
       </div>
 
+      {/* ✅ Display Filtered Food Cards */}
       <div className="mood-meal-container">
         <div className="container mt-4">
           <div className="row">
@@ -113,6 +136,63 @@ function MoodMeal() {
           </div>
         </div>
       </div>
+
+      {/* ✅ Aesthetic Health Tips Section */}
+      {moodMeal && (
+        <div
+          style={{
+            textAlign: "center",
+            marginTop: "40px",
+            marginBottom: "50px",
+          }}
+        >
+          <h3
+            style={{
+              color: "#ff6600",
+              fontWeight: "bold",
+              marginBottom: "20px",
+            }}
+          >
+            💡 Health Tips for Your {moodMeal.charAt(0).toUpperCase() + moodMeal.slice(1)} Mood
+          </h3>
+
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              gap: "20px",
+              flexWrap: "wrap",
+              padding: "10px 20px",
+            }}
+          >
+            {healthTips[moodMeal].map((tip, index) => (
+              <div
+                key={index}
+                style={{
+                  backgroundColor: "#fff",
+                  borderRadius: "12px",
+                  boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
+                  padding: "15px 20px",
+                  width: "280px",
+                  transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                  fontSize: "15px",
+                  color: "#444",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "translateY(-6px)";
+                  e.currentTarget.style.boxShadow = "0 6px 14px rgba(0,0,0,0.15)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "translateY(0)";
+                  e.currentTarget.style.boxShadow = "0 4px 10px rgba(0,0,0,0.1)";
+                }}
+              >
+                {tip}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       <FooterSection />
     </>
