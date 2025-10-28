@@ -10,8 +10,8 @@ import "./Login.css";
 
 function Login() {
   const [loginDetails, setLoginDetails] = useState({
-    emailId: "virat@gmail.com",
-    passWord: "Virat@123",
+    emailId: "",
+    passWord: "",
   });
   const [error, setError] = useState("");
   const [hover, setHover] = useState(false);
